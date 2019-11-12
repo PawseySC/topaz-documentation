@@ -28,4 +28,8 @@ Topaz most important software characteristics:
 
 ## Submitting jobs 
 ### Batch jobs
+Example job scripts:
+#### Single node (1 GPU)
+#### Single node (2 GPUs)
+#### Multiple nodes (2 GPUs each)
 ### Interactive mode
