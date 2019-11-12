@@ -30,12 +30,12 @@ Topaz most important software characteristics:
 * Profilers: ARM Forge/19.1.3, Intel VTune/19.0.4, NVIDIA Nsight
 
 ## Submitting jobs 
-Topaz compute nodes in the gpuq partition are configured as a shared resource. This means that it is especially important to specify number of GPUs, number of tasks and ammount of memory required by the job. If not specified, by default job will be allocated with a single CPU core, no GPUs and around 10GB of RAM.
+Topaz compute nodes in the gpuq partition are configured as a shared resource. This means that it is especially important to specify number of GPUs, number of tasks and amount of memory required by the job. If not specified, by default job will be allocated with a single CPU core, no GPUs and around 10GB of RAM.
 
 Please refer to the following examples which demonstrate different job allocation modes.
 ### Batch jobs examples
 #### Non-MPI code utilising a single GPU
-In the following example we assume that the ``gpu_code`` is a non-MPI application and can utilise a single GPU. We adjust the ammount of memory available for the job since by default we would be given only about 10gb per process. 
+In the following example we assume that the ``gpu_code`` is a non-MPI application and can utilise a single GPU. We adjust the amount of memory available for the job since by default we would be given only about 10gb per process. 
 ```
 #!/bin/bash -l
 #SBATCH --nodes=1
@@ -50,7 +50,7 @@ module load cuda
 srun -n 1 --export=all ./gpu_code
 ```
 #### MPI code utilising 2 GPUs
-In the following example we assume that the ``gpu_code`` is a MPI application and can utilise a single GPU per process. We run two processes per node, we adjust the ammount of memory per node single by default we would be given only 10gb per process. We also use ``--ntasks-per-socket`` option to run a single process per socket in order to maximise memory badwidth between CPU and GPU memory.
+In the following example we assume that the ``gpu_code`` is a MPI application and can utilise a single GPU per process. We run two processes per node, we adjust the amount of memory per node single by default we would be given only 10gb per process. We also use ``--ntasks-per-socket`` option to run a single process per socket in order to maximise memory bandwidth between CPU and GPU memory.
 ```
 #!/bin/bash -l
 #SBATCH --nodes=1
@@ -83,7 +83,7 @@ export OMP_NUM_THREADS=8
 srun -n 1 --export=all ./gpu_code
 ```
 #### MPI + OpenMP code utilising two GPUs and all available CPU cores per node
-In the following example we assume that ``gpu_code`` ia a MPI + OpenMP code utilising a single GPU per process and capable of using OpenMP mutlithreading to additionally utilise all CPU cores available within the node. We run the code on two nodes with two processes per node, each using a single GPU. We use ``--ntasks-per-socket`` option to run a single process per socket in order to maximise memory badwidth between CPU and GPU memory. We also adjust the amount of memory to 180gb since by default we would be given only 10gb per process.
+In the following example we assume that ``gpu_code`` ia a MPI + OpenMP code utilising a single GPU per process and capable of using OpenMP multithreading to additionally utilise all CPU cores available within the node. We run the code on two nodes with two processes per node, each using a single GPU. We use ``--ntasks-per-socket`` option to run a single process per socket in order to maximise memory bandwidth between CPU and GPU memory. We also adjust the amount of memory to 180gb since by default we would be given only 10gb per process.
 ```
 #!/bin/bash -l
 #SBATCH --nodes=2
