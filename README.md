@@ -10,7 +10,7 @@ Topaz most important hardware characteristics:
 * 100Gbit Infiniband between compute nodes. 
 
 ## Queueing system configuration
-Topaz resources are managed by SLURM queueing system. For detailed information about SLURM usage please refer to: https://support.pawsey.org.au/documentation/display/US/Job+Scheduling
+Topaz resources are managed by Slurm queueing system. For detailed information about Slurm usage please refer to: https://support.pawsey.org.au/documentation/display/US/Job+Scheduling
 
 There are two partitions (queues) on Topaz:
 * gpuq - for all compute jobs with 20 compute nodes (t001 - t020), max. 24h walltime and max. 8 running jobs per user,
@@ -21,7 +21,7 @@ Topaz compute nodes in the gpuq partition are configured as a shared resource, i
 ## Available software
 Topaz most important software characteristics: 
 * Centos 7.6 OS,
-* SLURM 18.08.6 queueing system,
+* Slurm 18.08.6 queueing system,
 * Compilers: gcc/8.3.0, intel/19.0.5, pgi/19.7, clang/9.0.0
 * Python/3.6.3
 * CUDA/10.1
@@ -31,6 +31,17 @@ Topaz most important software characteristics:
 
 ## Submitting jobs 
 Topaz compute nodes in the gpuq partition are configured as a shared resource. This means that it is especially important to specify number of GPUs, number of tasks and amount of memory required by the job. If not specified, by default job will be allocated with a single CPU core, no GPUs and around 10GB of RAM.
+
+It is recommended that all jobs request the following:
+* number of nodes with ``--nodes``,
+* number of GPUs per node with ``--gres=gpu:N`` (should be always used, unless for compiling),
+* number of processes with ``--ntasks-per-node`` and ``--ntasks-per-socket``, 
+* number of threads per process with ``--cpus-per-task`` (in case of multithreaded jobs),
+* amount of memory with ``--mem``,
+* walltime with ``--time``,
+* partition with ``--partition``,
+* Pawsey project ID with ``--account``,
+Similar to other Pawsey systems we also recommend to use ``--export=NONE``to establish a clean environment. Otherwise Slurm will propagate current environment variables to the job.
 
 Please refer to the following examples which demonstrate different job allocation modes.
 ### Batch jobs examples
