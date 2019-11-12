@@ -1,3 +1,6 @@
+Topaz Documentation (draft)
+======
+
 ## System configuration 
 Topaz most important hardware characteristics:
 * 22 compute nodes, each node is equipped with:
