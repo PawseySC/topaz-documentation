@@ -42,7 +42,7 @@ It is recommended that all jobs request the following:
 * partition with ``--partition``,
 * Pawsey project ID with ``--account``.
 
-Similar to other Pawsey systems we also recommend to use ``--export=NONE``to establish a clean environment. Otherwise Slurm will propagate current environment variables to the job.
+Similar to other Pawsey systems we also recommend to use ``--export=NONE`` to establish a clean environment. Otherwise Slurm will propagate current environment variables to the job.
 
 Please refer to the following examples which demonstrate different job allocation modes.
 ### Batch jobs examples
