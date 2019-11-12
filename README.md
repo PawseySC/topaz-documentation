@@ -40,6 +40,7 @@ In the following example we assume that the ``gpu_code`` is a non-MPI applicatio
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=90gb
 #SBATCH --time=00:01:00
+#SBATCH --partition=gpuq
 #SBATCH --account=[your-project]
 #SBATCH --export=NONE
 module load cuda
@@ -55,6 +56,7 @@ In the following example we assume that the ``gpu_code`` is a MPI application an
 #SBATCH --ntasks-per-socket=1
 #SBATCH --mem=180gb
 #SBATCH --time=00:01:00
+#SBATCH --partition=gpuq
 #SBATCH --account=[your-project]
 #SBATCH --export=NONE
 module load cuda
@@ -70,6 +72,7 @@ In the following example we assume that the ``gpu_code`` is an OpenMP code utili
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=90gb
 #SBATCH --time=00:01:00
+#SBATCH --partition=gpuq
 #SBATCH --account=[your-project]
 #SBATCH --export=NONE
 module load cuda
@@ -87,16 +90,43 @@ In the following example we assume that ``gpu_code`` ia a MPI + OpenMP code util
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=180gb
 #SBATCH --time=00:01:00
+#SBATCH --partition=gpuq
 #SBATCH --account=[your-project]
 #SBATCH --export=NONE
 module load cuda
 export OMP_NUM_THREADS=8
 srun -n 4 --export=all ./gpu_code
 ```
-### Interactive mode examples
+### Interactive mode
 As on other Pawsey systems, ``salloc`` command can be used to run interactive sessions. ``#SBATCH`` options mentioned above can be used to specify various interactive job parameters, e.g. to run a MPI code utilising 2 GPUs one can open an interactive session with the following command:   
 ```
-salloc --nodes=1 --gres=gpu:2 --ntasks-per-node=2 --ntasks-per-socket=1 --mem=180gb --time=00:05:00 --account=[your-project] -pgpuq
+salloc --nodes=1 --gres=gpu:2 --ntasks-per-node=2 --ntasks-per-socket=1 --mem=180gb --time=00:05:00 --partition=gpuq --account=[your-project]
 ```
 
 For all interactive sessions, after ``salloc`` has run and you are on a compute node, you will need to use the ``srun`` command to execute your commands. This is valid for all commands, for instance ``srun`` needs to be used in order to run ``nvidia-smi`` command on the interactive node:
+```
+$ salloc -N 1 -pgpuq --gres=gpu:1 --ntasks-per-node=1
+salloc: Granted job allocation 1861
+salloc: Waiting for resource configuration
+salloc: Nodes t016 are ready for job
+bash-4.2$ nvidia-smi
+No devices were found
+bash-4.2$ srun -n1 nvidia-smi
+Tue Nov 12 11:54:58 2019
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla V100-PCIE...  On   | 00000000:18:00.0 Off |                    0 |
+| N/A   28C    P0    25W / 250W |      0MiB / 16130MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+```
