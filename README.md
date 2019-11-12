@@ -27,3 +27,5 @@ Topaz most important software characteristics:
 * Profilers: ARM Forge/19.1.3, Intel VTune/19.0.4, NVIDIA Nsight
 
 ## Submitting jobs 
+### Batch jobs
+### Interactive mode
