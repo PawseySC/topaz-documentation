@@ -94,3 +94,9 @@ export OMP_NUM_THREADS=8
 srun -n 4 --export=all ./gpu_code
 ```
 ### Interactive mode examples
+As on other Pawsey systems, ``salloc`` command can be used to run interactive sessions. ``#SBATCH`` options mentioned above can be used to specify various interactive job parameters, e.g. to run a MPI code utilising 2 GPUs one can open an interactive session with the following command:   
+```
+salloc --nodes=1 --gres=gpu:2 --ntasks-per-node=2 --ntasks-per-socket=1 --mem=180gb --time=00:05:00 --account=[your-project] -pgpuq
+```
+
+For all interactive sessions, after ``salloc`` has run and you are on a compute node, you will need to use the ``srun`` command to execute your commands. This is valid for all commands, for instance ``srun`` needs to be used in order to run ``nvidia-smi`` command on the interactive node:
