@@ -44,7 +44,7 @@ It is recommended that all jobs request the following:
 * number of GPUs per node with ``--gres=gpu:N`` (should be always used, unless for compiling),
 * number of processes with ``--ntasks-per-node`` and ``--ntasks-per-socket``, 
 * number of threads per process with ``--cpus-per-task`` (in case of multithreaded jobs),
-* amount of memory per node with ``--mem`` (please note that without this option scheduler will allocate approx. 10gb memory limit per process),
+* amount of memory per node with ``--mem`` (please note that if this option is not used scheduler will allocate approx. 10gb memory per process),
 * walltime with ``--time``,
 * partition with ``--partition``,
 * Pawsey project ID with ``--account``.
