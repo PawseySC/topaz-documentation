@@ -29,6 +29,13 @@ Topaz most important software characteristics:
 * Singularity/3.3.0
 * Profilers: ARM Forge/19.1.3, Intel VTune/19.0.4, NVIDIA Nsight
 
+## Logging in 
+Interaction with Topaz is done remotely using SSH (Secure Shell version 2, SSH-2):
+```
+localComputer:~> ssh username@topaz.pawsey.org.au
+```
+More information about SSH-based access: https://support.pawsey.org.au/documentation/display/US/Logging+in
+
 ## Submitting jobs 
 Topaz compute nodes in the gpuq partition are configured as a shared resource. This means that it is especially important to specify number of GPUs, number of tasks and amount of memory required by the job. If not specified, by default job will be allocated with a single CPU core, no GPUs and around 10GB of RAM.
 
@@ -37,7 +44,7 @@ It is recommended that all jobs request the following:
 * number of GPUs per node with ``--gres=gpu:N`` (should be always used, unless for compiling),
 * number of processes with ``--ntasks-per-node`` and ``--ntasks-per-socket``, 
 * number of threads per process with ``--cpus-per-task`` (in case of multithreaded jobs),
-* amount of memory with ``--mem``,
+* amount of memory per node with ``--mem`` (please note that without this option scheduler will allocate approx. 10gb memory limit per process),
 * walltime with ``--time``,
 * partition with ``--partition``,
 * Pawsey project ID with ``--account``.
