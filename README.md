@@ -152,3 +152,6 @@ Tue Nov 12 11:54:58 2019
 |  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
 ```
+### Known Issues, Tips and Tricks
+#### Using singularity with GPUs
+The ``--nv`` option need to be used when using Singularity on Topaz computational nodes.
