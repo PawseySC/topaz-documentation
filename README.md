@@ -155,3 +155,6 @@ Tue Nov 12 11:54:58 2019
 ### Known Issues, Tips and Tricks
 #### Using singularity with GPUs
 The ``--nv`` option need to be used when using Singularity on Topaz computational nodes.
+
+#### Segmentation fault while running CUDA/OpenACC applications with UCX support
+Segmentation fault can occur if applications are either statically linked to CUDA liraries or memory allocated before MPI_Init. As a workaround, disable memory type cache by exporting UCX_MEMTYPE_CACHE=n
